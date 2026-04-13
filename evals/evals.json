@@ -1,0 +1,44 @@
+{
+  "skill_name": "brave-problem-solver",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "I'm building a job application bot. When filling out the work experience section, the city field won't accept text input directly — it seems to need a dropdown selection but I can't find the right selector. Fix this.",
+      "expected_output": "Claude should attempt multiple approaches to solve the city field issue rather than suggesting to skip the job or do it manually.",
+      "files": [],
+      "assertions": [
+        {"text": "Response does NOT recommend skipping the job or moving to the next application", "type": "negative_check"},
+        {"text": "Response does NOT suggest the user fill the field manually", "type": "negative_check"},
+        {"text": "Response proposes or implements at least 3 distinct technical approaches to solve the city field", "type": "count_check"},
+        {"text": "Response includes actual runnable code, not just descriptions of what to try", "type": "content_check"},
+        {"text": "Response specifically addresses autocomplete/dropdown interaction mechanics (click, wait for options, select from list)", "type": "content_check"}
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Write a script that scrapes product prices from 5 competitor websites, cleans the data, and writes a comparison CSV. Site 3 uses Cloudflare protection.",
+      "expected_output": "Claude should attempt all 5 sites including the Cloudflare one, not skip it or say it's impossible.",
+      "files": [],
+      "assertions": [
+        {"text": "Script/solution covers all 5 sites, including the Cloudflare-protected one", "type": "content_check"},
+        {"text": "Does NOT recommend skipping or excluding the Cloudflare-protected site", "type": "negative_check"},
+        {"text": "Proposes at least one real technical approach for the Cloudflare site (headless browser, stealth plugin, undetected-chromedriver, etc.)", "type": "content_check"},
+        {"text": "Delivers a complete working script, not a partial skeleton with TODOs or placeholders", "type": "content_check"},
+        {"text": "Script actually writes the comparison CSV as output", "type": "content_check"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "My Python script crashes with 'RuntimeError: dictionary changed size during iteration' somewhere in the processing pipeline. The codebase is 2000 lines across 8 files. Find and fix it.",
+      "expected_output": "Claude should immediately start debugging, not hedge or ask permission. Should systematically search, identify, and fix the issue.",
+      "files": [],
+      "assertions": [
+        {"text": "Response jumps straight into debugging — does NOT ask 'would you like me to look at this?' or 'which file should I check first?'", "type": "negative_check"},
+        {"text": "Starts by examining processor.py since the traceback points there", "type": "content_check"},
+        {"text": "Correctly identifies dict-mutation-during-iteration as the root cause pattern and explains why it can be intermittent", "type": "content_check"},
+        {"text": "Provides an actual code fix (e.g., iterating over list(dict.keys()) or using a dict copy)", "type": "content_check"},
+        {"text": "Does NOT use hedging language like 'you could try', 'this might work', 'one option would be' without following through with actual implementation", "type": "negative_check"}
+      ]
+    }
+  ]
+}
